@@ -1,5 +1,7 @@
 <?php
+// PHP code to fetch questions from the database
 
+// Your database connection code
 $db_host = '127.0.0.1';
 $db_user = 'root';
 $db_password = 'root';
@@ -40,7 +42,7 @@ if (!$result) {
 <html>
 <head>
     <title>Quiz</title>
-    <script src="script.js"></script>
+    <script src="quiz.js"></script>
 </head>
 <body>
 <h1>Quiz</h1>
@@ -72,6 +74,7 @@ if (!$result) {
     var optionDElement = document.getElementById('option-D');
     var resultTextElement = document.getElementById('result-text');
     var nextButton = document.getElementById('next-btn');
+    var score = 0;
 
     function displayQuestion() {
         var question = questions[currentQuestionIndex];
@@ -89,9 +92,7 @@ if (!$result) {
         var resultText = '';
 
         if (selectedOptionText === correctAnswer) {
-            resultText = 'Correct!';
-        } else {
-            resultText = 'Wrong!';
+            score++;
         }
 
         resultTextElement.innerText = resultText;
@@ -107,12 +108,12 @@ if (!$result) {
             nextButton.style.display = 'none';
         } else {
             // End of the quiz, display the final result
-            questionTextElement.innerText = 'Quiz finished!';
+            questionTextElement.innerText = 'Quiz finished! Youve got:';
             optionAElement.style.display = 'none';
             optionBElement.style.display = 'none';
             optionCElement.style.display = 'none';
             optionDElement.style.display = 'none';
-            resultTextElement.innerText = 'You have completed the quiz.';
+            resultTextElement.innerText = " " + score + "points";
             nextButton.style.display = 'none';
         }
     }
