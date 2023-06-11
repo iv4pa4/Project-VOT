@@ -41,25 +41,71 @@ if (!$result) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quiz</title>
+    <title>Animal Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+
+        #question-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #options-container {
+            margin-top: 10px;
+        }
+
+        .option-btn {
+            margin-right: 10px;
+        }
+
+        #result-container {
+            margin-top: 20px;
+        }
+
+        #result-text {
+            margin-bottom: 10px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <script src="quiz.js"></script>
 </head>
 <body>
-<h1>Quiz</h1>
+<div class="container">
+    <h1>Quiz</h1>
 
-<div id="question-container">
-    <h3 id="question-text"></h3>
-    <div id="options-container">
-        <button class="option-btn" id="option-A"></button>
-        <button class="option-btn" id="option-B"></button>
-        <button class="option-btn" id="option-C"></button>
-        <button class="option-btn" id="option-D"></button>
+    <div id="question-container">
+        <h3 id="question-text"></h3>
+        <div id="options-container">
+            <button class="btn btn-primary option-btn" id="option-A"></button>
+            <button class="btn btn-primary option-btn" id="option-B"></button>
+            <button class="btn btn-primary option-btn" id="option-C"></button>
+            <button class="btn btn-primary option-btn" id="option-D"></button>
+        </div>
     </div>
-</div>
 
-<div id="result-container">
-    <h3 id="result-text"></h3>
-    <button id="next-btn" style="display: none;">Next</button>
+    <div id="result-container">
+        <h3 id="result-text"></h3>
+        <button class="btn btn-primary" id="next-btn" style="display: none;">Next</button>
+    </div>
 </div>
 
 <script>
@@ -96,7 +142,7 @@ if (!$result) {
         }
 
         resultTextElement.innerText = resultText;
-        nextButton.style.display = 'block';
+        setTimeout(nextQuestion, 1000);
     }
 
     function nextQuestion() {
@@ -108,12 +154,12 @@ if (!$result) {
             nextButton.style.display = 'none';
         } else {
             // End of the quiz, display the final result
-            questionTextElement.innerText = 'Quiz finished! Youve got:';
+            questionTextElement.innerText = 'Quiz finished! You have earned:';
             optionAElement.style.display = 'none';
             optionBElement.style.display = 'none';
             optionCElement.style.display = 'none';
             optionDElement.style.display = 'none';
-            resultTextElement.innerText = " " + score + "points";
+            resultTextElement.innerText = ' ' + score + ' points';
             nextButton.style.display = 'none';
         }
     }
@@ -135,11 +181,6 @@ if (!$result) {
 
     optionDElement.addEventListener('click', function() {
         checkAnswer(optionDElement);
-    });
-
-    // Add event listener to the next button
-    nextButton.addEventListener('click', function() {
-        nextQuestion();
     });
 </script>
 </body>
