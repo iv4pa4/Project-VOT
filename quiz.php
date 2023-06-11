@@ -1,5 +1,9 @@
 <?php
+<<<<<<< Updated upstream
 
+=======
+// Assuming you have already established a database connection
+>>>>>>> Stashed changes
 $db_host = '127.0.0.1';
 $db_user = 'root';
 $db_password = 'root';
@@ -21,6 +25,7 @@ if ($mysqli->connect_error) {
     exit();
 }
 
+<<<<<<< Updated upstream
 // Query the database to get 5 random questions
 $result = $mysqli->query("SELECT q.question, q.A, q.B, q.C, q.D, c.answer
                          FROM questions AS q
@@ -32,11 +37,37 @@ while ($row = $result->fetch_assoc()) {
     $question = $row['question'];
     $options = [$row['A'], $row['B'], $row['C'], $row['D']];
     $correctAnswer = $row['answer'];
+=======
+// Retrieve questions and options from the database
+$query = 'SELECT question, correct_answer_id, A, B, C, D FROM questions';
+$result = $mysqli->query($query);
+
+if (!$result) {
+    echo 'Error: '.$mysqli->error;
+    exit();
+}
+
+$quizData = [];
+
+while ($row = $result->fetch_assoc()) {
+    $question = $row['question'];
+    $correctAnswerId = $row['correct_answer_id'];
+    $options = [
+        $row['A'],
+        $row['B'],
+        $row['C'],
+        $row['D']
+    ];
+>>>>>>> Stashed changes
 
     $quizData[] = [
         'question' => $question,
         'options' => $options,
+<<<<<<< Updated upstream
         'correctAnswer' => $correctAnswer
+=======
+        'correctAnswerId' => $correctAnswerId
+>>>>>>> Stashed changes
     ];
 }
 
